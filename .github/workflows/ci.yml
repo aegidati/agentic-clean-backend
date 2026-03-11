@@ -24,7 +24,7 @@ jobs:
 
       - name: Detect unresolved placeholders
         run: |
-          if grep -R "<STARTER_" .; then
+          if grep -E "<[A-Z0-9_-]+>" README.md AUDIT-REPORT.md starter.manifest.yaml; then
             echo "Unresolved template placeholders found"
             exit 1
           fi
