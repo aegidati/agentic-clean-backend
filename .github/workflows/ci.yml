@@ -2,6 +2,8 @@ name: Starter CI
 
 on:
   push:
+    tags:
+      - 'v*'
   pull_request:
 
 jobs:
