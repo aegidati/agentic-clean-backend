@@ -1,107 +1,120 @@
-# clean-backend starter
+# Agentic Clean Backend
 
-`clean-backend` is a minimal, production-like backend starter based on Clean Architecture (Ports & Adapters).
+## Purpose
 
-It is designed to be copied (or imported via git subtree) into a derived project under `app/`.
+This starter provides the backend foundation for Agentic platform projects.
 
-## Stack
+It implements a Clean Architecture structure separating:
 
-- Node.js 20+
-- TypeScript
-- Fastify
-- Vitest
+- Domain
+- Application
+- Infrastructure
+- Presentation
 
-## Architecture and dependency rules
+The goal is to provide a deterministic backend architecture that can evolve independently from UI, infrastructure, and runtime composition.
 
-This starter follows these layers:
+---
 
-- `app/src/domain` → core business concepts, no framework dependencies
-- `app/src/application` → use cases and ports/interfaces, depends only on domain
-- `app/src/infrastructure` → adapters implementing application ports
-- `app/src/presentation` → HTTP layer (Fastify routes), depends on application/domain
+## Install target
 
-Dependency rule:
+This starter installs into:
 
-- `domain` depends on nothing
-- `application` depends on `domain` only
-- `infrastructure` depends on `application` and `domain`
-- `presentation` depends on `application` and `domain`
+app/backend
 
-## Included behavior
+---
 
-- Health endpoint: `GET /health`
-- Response: `{ "status": "ok" }`
-- Automated in-memory test using Fastify `inject` (no real network port)
+## Included
 
-## Install this starter in a derived project
+- Clean Architecture folder structure
+- Backend bootstrap configuration
+- Domain / Application / Infrastructure / Presentation layers
+- Backend development entrypoint
 
-### Option 1: Copy files
+---
 
-Copy everything from:
+## Not included
 
-- `clean-backend/app/*`
+This starter intentionally does not include:
 
-Into your derived project:
+- Domain business modules
+- Authentication systems
+- Observability tooling
+- Production infrastructure configuration
+- External service integrations
 
-- `target-project/app/`
+Those concerns are implemented by other starters.
 
-### Option 2: Git subtree
+---
 
-From your derived project repository root:
+## Prerequisites
 
-```bash
-git subtree add --prefix=app <starter-repo> main --squash
-```
+Typical runtime prerequisites:
 
-Example with a named remote:
+- Python runtime
+- Backend dependency manager (pip / poetry / similar)
+- Optional Docker runtime for fullstack composition
 
-```bash
-git remote add starters <path-or-url-to-agentic-architecture-starters>
-git fetch starters
-git subtree add --prefix=app starters main --squash
-git subtree pull --prefix=app starters main --squash
-```
+---
 
-If you only want this starter folder content, use a filtered branch or copy approach based on your workflow.
+## Expected structure after installation
 
-## Run locally
+app/backend
+  domain
+  application
+  infrastructure
+  presentation
 
-From `app/`:
+---
 
-```bash
-npm install
-npm run dev
-```
+## Installation
 
-Build and run:
+1. Create a project using AGENTIC-TEMPLATE.
+2. Install this starter into:
 
-```bash
-npm run build
-npm start
-```
+app/backend
 
-Run tests:
+3. Install backend dependencies.
+4. Run validation checks.
 
-```bash
-npm test
-```
+---
 
-Run in-memory smoke check:
+## Post-install validation
 
-```bash
-npm run smoke
-```
+Verify that:
 
-## Where to put new features
+- backend dependencies install successfully
+- backend folder structure exists
+- backend boot command runs
+- backend tests execute correctly
 
-For each new feature, map responsibilities by layer:
+---
 
-- Domain rules/value objects/entities → `src/domain`
-- Use cases and required ports → `src/application`
-- Implementations of ports (DB, external APIs, cache, queues) → `src/infrastructure`
-- HTTP routes/controllers/plugins → `src/presentation`
-- Composition/wiring → `src/main.ts`
+## Compatibility
 
-## ADR note
+Compatible with:
 
-After installing this starter into a derived project, create a project-specific **ADR-001** that documents architectural decisions for that project.
+- agentic-react-spa
+- agentic-flutter-client
+- agentic-api-contracts-api
+- agentic-postgres-dev
+- agentic-fullstack-composition
+
+---
+
+## Exit criteria
+
+Installation is successful when:
+
+- app/backend exists
+- architecture layers exist
+- dependencies install successfully
+- backend application boot command runs
+- no unresolved placeholders remain
+
+---
+
+## Notes
+
+This starter is intentionally minimal.
+
+Domain logic and application services should be added through feature modules.
